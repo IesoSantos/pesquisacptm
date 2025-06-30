@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.MainActivity">
+
+    <EditText
+        android:id="@+id/nomePesquisador"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:hint="Nome do Pesquisador"
+        android:inputType="textPersonName"
+        android:textSize="18sp"
+        android:padding="12dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"/>
+
+    <TextView
+        android:id="@+id/lblTipoPesquisa"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nomePesquisador"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:text="Tipo de Pesquisa"
+        android:textSize="18sp"/>
+
+    <!-- Spinner para selecionar a linha -->
+    <Spinner
+        android:id="@+id/spinnerTipoPesquisa"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lblTipoPesquisa"
+        tools:ignore="TouchTargetSizeCheck" />
+
+
+    <TextView
+        android:id="@+id/lblLinha"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinnerTipoPesquisa"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:text="Linha"
+        android:textSize="18sp"/>
+
+    <!-- Spinner para selecionar a linha -->
+    <Spinner
+        android:id="@+id/spinnerLinha"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lblLinha"
+        tools:ignore="TouchTargetSizeCheck" />
+
+
+    <TextView
+        android:id="@+id/lblEstacao"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinnerLinha"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:text="Estação"
+        android:textSize="18sp"/>
+
+    <!-- Spinner para selecionar a estação -->
+    <Spinner
+        android:id="@+id/spinnerEstacao"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lblEstacao"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/lblLocal"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinnerEstacao"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:text="Local"
+        android:textSize="18sp"/>
+
+    <!-- Spinner para selecionar o local -->
+    <Spinner
+        android:id="@+id/spinnerLocal"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lblLocal"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <!-- Layout dos Botões -->
+    <LinearLayout
+        android:id="@+id/layoutBotoes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinnerLocal">
+
+        <!-- Botão para enviar as informações -->
+        <Button
+            android:id="@+id/btnEntrar"
+            android:layout_width="150sp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5sp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10sp"
+            android:paddingTop="0dp"
+            android:paddingBottom="0dp"
+            android:text="Começar"
+            android:textSize="12sp" />
+
+        <!-- Botão para iniciar a pesquisa -->
+        <Button
+            android:id="@+id/btnExportar"
+            android:layout_width="150sp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5sp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10sp"
+            android:paddingTop="0dp"
+            android:paddingBottom="0dp"
+            android:text="Exportar"
+            android:textSize="12sp" />
+
+        <!-- Botão para exportar as pesquisas -->
+        <Button
+            android:id="@+id/btnSair"
+            android:layout_width="150sp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5sp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10sp"
+            android:paddingTop="0dp"
+            android:paddingBottom="0dp"
+            android:text="Sair"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
