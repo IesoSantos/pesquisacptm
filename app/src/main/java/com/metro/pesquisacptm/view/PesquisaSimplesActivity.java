@@ -16,17 +16,19 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.metro.pesquisacptm.R;
+import com.metro.pesquisacptm.controller.PesquisaController;
 import com.metro.pesquisacptm.model.Pesquisa;
+import com.metro.pesquisacptm.persistence.LogErros;
 import com.metro.pesquisacptm.persistence.Utilidades;
 
 public class PesquisaSimplesActivity extends AppCompatActivity {
     private int quantidadePesquisa;
-    private CheckBox checkboxCPTM,checkboxViaMobilidade,checkboxViaQuatro, checkboxMetro,
-            checkboxRua;
+    private CheckBox checkboxCPTM,checkboxViaMobilidade,checkboxViaQuatro,
+            checkboxMetro, checkboxRua;
     private Button btnSalvar, btnEncerrar;
     TextView lblQuantidadePesquisa, lblIntrucao;
     private Pesquisa pesquisa;
-    private Utilidades utilidades;
+    //private Utilidades utilidades;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +41,7 @@ public class PesquisaSimplesActivity extends AppCompatActivity {
             return insets;
         });
 
-        utilidades = Utilidades.getInstance(this);
+        //utilidades = Utilidades.getInstance(this);
         pesquisa = (Pesquisa) getIntent().getSerializableExtra("pesquisa", Pesquisa.class);
         quantidadePesquisa = getIntent().getIntExtra("quantidadePesquisa",0);
         lblQuantidadePesquisa = findViewById(R.id.lblQuantidadePesquisaSimples);
@@ -137,7 +139,7 @@ public class PesquisaSimplesActivity extends AppCompatActivity {
                 salvar();
             }else {
                 //origem = null;
-                Toast.makeText(this, "Por favor, Selecione a Origem", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Por favor, Selecione Uma Opção!", Toast.LENGTH_LONG).show();
             }
 
         });
@@ -160,14 +162,22 @@ public class PesquisaSimplesActivity extends AppCompatActivity {
     private void salvar(){
         if(selecionou()){
 
-            utilidades.salvarPesquisa(pesquisa);
-            quantidadePesquisa++;
-            checkboxCPTM.setChecked(false);
-            checkboxMetro.setChecked(false);
-            checkboxViaQuatro.setChecked(false);
-            checkboxViaMobilidade.setChecked(false);
-            checkboxRua.setChecked(false);
-            lblQuantidadePesquisa.setText("Quantidade de Pesquisas Realizadas: "+quantidadePesquisa);
+            //utilidades.salvarPesquisa(pesquisa);
+            PesquisaController controller = new PesquisaController(this);
+            try {
+                controller.salvarPesquisa(pesquisa);
+                quantidadePesquisa++;
+                checkboxCPTM.setChecked(false);
+                checkboxMetro.setChecked(false);
+                checkboxViaQuatro.setChecked(false);
+                checkboxViaMobilidade.setChecked(false);
+                checkboxRua.setChecked(false);
+                lblQuantidadePesquisa.setText("Quantidade de Pesquisas Realizadas: "+quantidadePesquisa);
+
+            } catch (Exception e) {
+                caixaDeDialogo(e.getMessage());
+            }
+
             /*
             String dataPesquisa = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
             String horaPesquisa = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
@@ -209,4 +219,17 @@ public class PesquisaSimplesActivity extends AppCompatActivity {
         return selecionou;
     }
 
+    private void caixaDeDialogo(String mensagem){
+        new AlertDialog.Builder(this)
+                .setTitle("Erro")
+                .setMessage(mensagem)
+                .setPositiveButton("Sim", (dialog, which) -> {
+                    try {
+                        new LogErros(mensagem);
+                    } catch (Exception e) {
+                        caixaDeDialogo(e.getMessage());
+                    }
+                })
+                .show();
+    }
 }

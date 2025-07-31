@@ -23,7 +23,7 @@ import com.metro.pesquisacptm.model.Pesquisa;
 
 
 public class DatabaseHelper extends SQLiteOpenHelper implements Serializable {
-    private static final String DATABASE_NAME = "metro.db";
+    private static final String DATABASE_NAME = "pesquisa_od_gestoras.db";
     private static final int DATABASE_VERSION = 1; // Atualizado para refletir a nova estrutura
     private final Context context;
     private SQLiteDatabase db;
@@ -81,9 +81,9 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable {
         try {
             db.execSQL("CREATE TABLE IF NOT EXISTS Linhas (" +
                     "id INTEGER PRIMARY KEY NOT NULL, " +
-                    "nome TEXT NOT NULL, " +
-                    "sigla TEXT NOT NULL, " +
-                    "gestora TEXT NOT NULL)");
+                    "nm_linha TEXT NOT NULL, " +
+                    "sg_linha TEXT NOT NULL, " +
+                    "nm_gestora TEXT NOT NULL)");
         } catch (Exception e) {
             Log.e("Erro - DatabaseHelper - OnCreate", "Erro na criação da tabela Linhas: " + e.getMessage());
         }
@@ -92,8 +92,8 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable {
         try {
             db.execSQL("CREATE TABLE IF NOT EXISTS Estacoes (" +
                     "id INTEGER PRIMARY KEY NOT NULL, " +
-                    "nome TEXT NOT NULL, " +
-                    "sigla TEXT NOT NULL, " +
+                    "nm_estacao TEXT NOT NULL, " +
+                    "sg_estacao TEXT NOT NULL, " +
                     "id_linha INTEGER, " +
                     "isTransferencia INTEGER NOT NULL, " +
                     "FOREIGN KEY (id_linha) REFERENCES Linhas(id))");
@@ -106,7 +106,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable {
         try {
             db.execSQL("CREATE TABLE IF NOT EXISTS Areas (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-                    "nome TEXT NOT NULL, " +
+                    "nm_area TEXT NOT NULL, " +
                     "id_estacao INTEGER, " +
                     "FOREIGN KEY (id_estacao) REFERENCES Estacoes(id))");
 
@@ -153,11 +153,11 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable {
         db.beginTransaction();
         try {
             // Inserir dados na tabela Linhas
-            db.execSQL("INSERT INTO Linhas (id, nome, sigla, gestora) VALUES (7, 'Linha 7 - Rubi', 'L7', 'CPTM')");
-            db.execSQL("INSERT INTO Linhas (id, nome, sigla, gestora) VALUES (10, 'Linha 10 - Turquesa', 'L10', 'CPTM')");
-            db.execSQL("INSERT INTO Linhas (id, nome, sigla, gestora) VALUES (11,'Linha 11 - Coral', 'L11', 'CPTM')");
-            db.execSQL("INSERT INTO Linhas (id, nome, sigla, gestora) VALUES (12,'Linha 12 - Safira', 'L12', 'CPTM')");
-            db.execSQL("INSERT INTO Linhas (id, nome, sigla, gestora) VALUES (13,'Linha 13 - Jade', 'L13', 'CPTM')");
+            db.execSQL("INSERT INTO Linhas (id, nm_linha, sg_linha, nm_gestora) VALUES (7, 'Linha 7 - Rubi', 'L7', 'CPTM')");
+            db.execSQL("INSERT INTO Linhas (id, nm_linha, sg_linha, nm_gestora) VALUES (10, 'Linha 10 - Turquesa', 'L10', 'CPTM')");
+            db.execSQL("INSERT INTO Linhas (id, nm_linha, sg_linha, nm_gestora) VALUES (11,'Linha 11 - Coral', 'L11', 'CPTM')");
+            db.execSQL("INSERT INTO Linhas (id, nm_linha, sg_linha, nm_gestora) VALUES (12,'Linha 12 - Safira', 'L12', 'CPTM')");
+            db.execSQL("INSERT INTO Linhas (id, nm_linha, sg_linha, nm_gestora) VALUES (13,'Linha 13 - Jade', 'L13', 'CPTM')");
             db.setTransactionSuccessful();
             //Log.i("DatabaseHelper - inserirLinhas","Sucesso ao Criar Linhas");
         }catch (Exception e){
@@ -197,81 +197,81 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable {
 
 
             //Linha 7 - Rubi (CPTM)
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (84, 7, 'Brás','BAS',1)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (85, 7, 'Luz','LUZ',1)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (86, 7, 'Barra Funda','BFU',1)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (87, 7, 'Água Branca','ABR',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (88, 7, 'Lapa', 'LPA',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (89, 7, 'Piqueri' ,'PQR',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (90, 7, 'Pirituba' ,'PRT',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (91, 7, 'Vila Clarice','VCL',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (92, 7, 'Jaraguá','JRG',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (93, 7, 'Vila Aurora','VAU',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (94, 7, 'Perus','PRU',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (95, 7, 'Caieiras','CAI',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (96, 7, 'Franco da Rocha','FDR',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (97, 7, 'Baltazar Fidélis','BFI',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (98, 7, 'Francisco Morato','FMO',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (99, 7, 'Botujuru','BTJ',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (100, 7, 'Campo Limpo Paulista' ,'CLP',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (101, 7, 'Várzea Paulista','VPL',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (102, 7, 'Jundiaí','JUN',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (84, 7, 'Brás','BAS',1)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (85, 7, 'Luz','LUZ',1)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (86, 7, 'Barra Funda','BFU',1)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (87, 7, 'Água Branca','ABR',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (88, 7, 'Lapa', 'LPA',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (89, 7, 'Piqueri' ,'PQR',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (90, 7, 'Pirituba' ,'PRT',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (91, 7, 'Vila Clarice','VCL',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (92, 7, 'Jaraguá','JRG',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (93, 7, 'Vila Aurora','VAU',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (94, 7, 'Perus','PRU',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (95, 7, 'Caieiras','CAI',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (96, 7, 'Franco da Rocha','FDR',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (97, 7, 'Baltazar Fidélis','BFI',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (98, 7, 'Francisco Morato','FMO',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (99, 7, 'Botujuru','BTJ',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (100, 7, 'Campo Limpo Paulista' ,'CLP',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (101, 7, 'Várzea Paulista','VPL',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (102, 7, 'Jundiaí','JUN',0)");
             //Linha 10 - Turquesa
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (144, 10,'Rio Grande da Serra','RGS',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (145, 10,'Ribeirão Pires','RPI',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (146, 10,'Guapituba','GPT',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (147, 10,'Mauá','MAU',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (148, 10,'Capuava','CPV',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (149, 10,'Santo André','SAN',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (150, 10,'Prefeito Saladino','PSA',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (151, 10,'Utinga','UTG',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (152, 10,'São Caetano do Sul','SCS',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (153, 10,'Tamanduateí','TMD',1)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (154, 10,'Ipiranga','IPG',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (155, 10,'Juventus–Mooca','MOC',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (156, 10,'Brás','BAS',1)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (157, 10,'Luz','LUZ',1)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (144, 10,'Rio Grande da Serra','RGS',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (145, 10,'Ribeirão Pires','RPI',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (146, 10,'Guapituba','GPT',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (147, 10,'Mauá','MAU',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (148, 10,'Capuava','CPV',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (149, 10,'Santo André','SAN',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (150, 10,'Prefeito Saladino','PSA',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (151, 10,'Utinga','UTG',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (152, 10,'São Caetano do Sul','SCS',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (153, 10,'Tamanduateí','TMD',1)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (154, 10,'Ipiranga','IPG',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (155, 10,'Juventus–Mooca','MOC',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (156, 10,'Brás','BAS',1)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (157, 10,'Luz','LUZ',1)");
             // Linha 11 - Coral CPTM
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (158, 11,'Luz','LUZ',1)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (159, 11,'Brás','BAS',1)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (160, 11,'Tatuapé','TAT',1)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (161, 11,'Itaquera','ITQ',1)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (162, 11,'Dom Bosco','DBO',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (163, 11,'José Bonifácio','JBO',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (164, 11,'Guaianases','GUA',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (165, 11,'Antônio Gianetti Neto','AGN',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (166, 11,'Ferraz de Vasconcelos','FVC',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (167, 11,'Poá','POÁ',1)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (168, 11,'Calmon Viana','CVN',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (169, 11,'Suzano','SUZ',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (170, 11,'Jundiapeba','JPB',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (171, 11,'Braz Cubas','BCB',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (172, 11,'Mogi das Cruzes','MDC',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (173, 11,'Estudantes','EST',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (158, 11,'Luz','LUZ',1)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (159, 11,'Brás','BAS',1)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (160, 11,'Tatuapé','TAT',1)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (161, 11,'Itaquera','ITQ',1)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (162, 11,'Dom Bosco','DBO',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (163, 11,'José Bonifácio','JBO',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (164, 11,'Guaianases','GUA',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (165, 11,'Antônio Gianetti Neto','AGN',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (166, 11,'Ferraz de Vasconcelos','FVC',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (167, 11,'Poá','POÁ',1)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (168, 11,'Calmon Viana','CVN',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (169, 11,'Suzano','SUZ',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (170, 11,'Jundiapeba','JPB',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (171, 11,'Braz Cubas','BCB',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (172, 11,'Mogi das Cruzes','MDC',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (173, 11,'Estudantes','EST',0)");
             //Linha 12 - Safira - CPTM
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (174, 12,'Brás','BAS',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (175, 12,'Tatuapé','TAT',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (176, 12,'Engenheiro Goulart','EGO',1)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (177, 12,'USP Leste','USL',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (178, 12,'Comendador Ermelino','ERM',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (179, 12,'São Miguel Paulista','SMP',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (180, 12,'Jardim Helena–Vila Mara','JHE',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (181, 12,'Itaim Paulista','ITI',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (182, 12,'Jardim Romano','JRO',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (183, 12,'Engenheiro Manoel Feio','EMF',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (184, 12,'Itaquaquecetuba','IQC',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (185, 12,'Aracaré','ARC',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (186, 12,'Calmon Viana','CVN',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (174, 12,'Brás','BAS',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (175, 12,'Tatuapé','TAT',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (176, 12,'Engenheiro Goulart','EGO',1)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (177, 12,'USP Leste','USL',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (178, 12,'Comendador Ermelino','ERM',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (179, 12,'São Miguel Paulista','SMP',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (180, 12,'Jardim Helena–Vila Mara','JHE',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (181, 12,'Itaim Paulista','ITI',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (182, 12,'Jardim Romano','JRO',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (183, 12,'Engenheiro Manoel Feio','EMF',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (184, 12,'Itaquaquecetuba','IQC',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (185, 12,'Aracaré','ARC',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (186, 12,'Calmon Viana','CVN',0)");
             //Linha 13 - Jade - CPTM
 
             /*
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (187, 13,'Barra Funda','BFU',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (188, 13,'Luz','LUZ',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (189, 13,'Brás','BAS',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (187, 13,'Barra Funda','BFU',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (188, 13,'Luz','LUZ',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (189, 13,'Brás','BAS',0)");
              */
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (187, 13,'Engenheiro Goulart','EGO',1)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (188, 13,'Guarulhos–Cecap','GCE',0)");
-            db.execSQL("INSERT INTO Estacoes (id,id_linha, nome, sigla, isTransferencia) VALUES (189, 13,'Aeroporto-Guarulhos','AGU',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (187, 13,'Engenheiro Goulart','EGO',1)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (188, 13,'Guarulhos–Cecap','GCE',0)");
+            db.execSQL("INSERT INTO Estacoes (id,id_linha, nm_estacao, sg_estacao, isTransferencia) VALUES (189, 13,'Aeroporto-Guarulhos','AGU',0)");
 
             db.setTransactionSuccessful();
         }finally {
@@ -286,15 +286,15 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable {
         try {
             // Inserir áreas comuns associadas à estação
 
-            db.execSQL("INSERT INTO Areas (id_estacao, nome) VALUES (?, 'Linha de Bloqueios 1')", new Object[]{idEstacao});
-            db.execSQL("INSERT INTO Areas (id_estacao, nome) VALUES (?, 'Linha de Bloqueios 2')", new Object[]{idEstacao});
-            db.execSQL("INSERT INTO Areas (id_estacao, nome) VALUES (?, 'Linha de Bloqueios 3')", new Object[]{idEstacao});
-            db.execSQL("INSERT INTO Areas (id_estacao, nome) VALUES (?, 'Linha de Bloqueios 4')", new Object[]{idEstacao});
-            db.execSQL("INSERT INTO Areas (id_estacao, nome) VALUES (?, 'Linha de Bloqueios 5')", new Object[]{idEstacao});
-            db.execSQL("INSERT INTO Areas (id_estacao, nome) VALUES (?, 'Linha de Bloqueios 6')", new Object[]{idEstacao});
-            db.execSQL("INSERT INTO Areas (id_estacao, nome) VALUES (?, 'Transferência')", new Object[]{idEstacao});
-            db.execSQL("INSERT INTO Areas (id_estacao, nome) VALUES (?, 'Mezanino Área Paga')", new Object[]{idEstacao});
-            db.execSQL("INSERT INTO Areas (id_estacao, nome) VALUES (?, 'Mezanino Área Livre')", new Object[]{idEstacao});
+            db.execSQL("INSERT INTO Areas (id_estacao, nm_area) VALUES (?, 'Linha de Bloqueios 1')", new Object[]{idEstacao});
+            db.execSQL("INSERT INTO Areas (id_estacao, nm_area) VALUES (?, 'Linha de Bloqueios 2')", new Object[]{idEstacao});
+            db.execSQL("INSERT INTO Areas (id_estacao, nm_area) VALUES (?, 'Linha de Bloqueios 3')", new Object[]{idEstacao});
+            db.execSQL("INSERT INTO Areas (id_estacao, nm_area) VALUES (?, 'Linha de Bloqueios 4')", new Object[]{idEstacao});
+            db.execSQL("INSERT INTO Areas (id_estacao, nm_area) VALUES (?, 'Linha de Bloqueios 5')", new Object[]{idEstacao});
+            db.execSQL("INSERT INTO Areas (id_estacao, nm_area) VALUES (?, 'Linha de Bloqueios 6')", new Object[]{idEstacao});
+            db.execSQL("INSERT INTO Areas (id_estacao, nm_area) VALUES (?, 'Transferência')", new Object[]{idEstacao});
+            db.execSQL("INSERT INTO Areas (id_estacao, nm_area) VALUES (?, 'Mezanino Área Paga')", new Object[]{idEstacao});
+            db.execSQL("INSERT INTO Areas (id_estacao, nm_area) VALUES (?, 'Mezanino Área Livre')", new Object[]{idEstacao});
 
             db.setTransactionSuccessful();
             //Log.i("DatabaseHelper - InserirAreasComuns", "inserirAreasComuns: Sucesso na Inserção da área comum");
@@ -311,7 +311,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable {
         SQLiteDatabase db = this.getReadableDatabase();
 
         // Carregar todas as linhas
-        Cursor cursor = db.rawQuery("SELECT id, nome, sigla, gestora FROM Linhas", null);
+        Cursor cursor = db.rawQuery("SELECT id, nm_linha, sg_linha, nm_gestora FROM Linhas", null);
 
         while (cursor.moveToNext()) {
             int id = cursor.getInt(0);
@@ -341,7 +341,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable {
         SQLiteDatabase db = this.getReadableDatabase();
 
         // Carregar todas as linhas
-        Cursor cursor = db.rawQuery("SELECT id, nome, sigla, gestora FROM Linhas", null);
+        Cursor cursor = db.rawQuery("SELECT id, nm_linha, sg_linha, nm_gestora FROM Linhas", null);
 
         while (cursor.moveToNext()) {
             int id = cursor.getInt(0);
@@ -367,7 +367,8 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable {
 
         // A consulta SQL busca as colunas: id, nome, sigla, isTransferencia
         Cursor cursor = db.rawQuery(
-                "SELECT id, nome, sigla, isTransferencia FROM Estacoes WHERE id_linha = ?",
+                "SELECT id, nm_estacao, sg_estacao, isTransferencia FROM Estacoes " +
+                        "WHERE id_linha = ?",
                 new String[]{String.valueOf(idLinha)});
 
         while (cursor.moveToNext()) {
@@ -393,7 +394,8 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable {
 
         // A consulta SQL busca as colunas: id, nome, sigla, isTransferencia
         Cursor cursor = db.rawQuery(
-                "SELECT id, nome, sigla, isTransferencia FROM Estacoes WHERE id_linha = ?",
+                "SELECT id, nm_estacao, sg_estacao, isTransferencia FROM " +
+                        "Estacoes WHERE id_linha = ?",
                 new String[]{String.valueOf(idLinha)});
 
         while (cursor.moveToNext()) {
@@ -430,7 +432,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable {
         try {
             // A consulta SQL busca as colunas: nome da área, onde o id_estacao é igual ao fornecido
             cursor = db.rawQuery(
-                    "SELECT nome FROM Areas WHERE id_estacao = ?",
+                    "SELECT nm_area FROM Areas WHERE id_estacao = ?",
                     new String[]{String.valueOf(idEstacao)});
 
             if (cursor != null && cursor.moveToFirst()) { // Move para o primeiro registro
@@ -442,7 +444,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable {
                 inserirAreasComuns(idEstacao);
                 // Refaça a consulta para garantir que as áreas comuns foram inseridas
                 cursor = db.rawQuery(
-                        "SELECT nome FROM Areas WHERE id_estacao = ?",
+                        "SELECT nm_area FROM Areas WHERE id_estacao = ?",
                         new String[]{String.valueOf(idEstacao)});
                 if (cursor != null && cursor.moveToFirst()) {
                     do {
@@ -461,8 +463,8 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable {
         //Log.i("DatabaseHelper - getAreaPorEstacao", "Tamanho do retorno getAreasPorEstacao "+areas.size());
         return areas;
     }
-
-    public void salvarPesquisa(Pesquisa pesquisa) {
+/*
+    public void salvarPesquisa(Pesquisa pesquisa){
         SQLiteDatabase sqLiteDatabase = null;
 
         try {
@@ -515,6 +517,97 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable {
                 sqLiteDatabase.close();  // Fecha o banco de dados
             }
         }
+    }
+ */
+
+    public void salvarPesquisa(Pesquisa pesquisa) throws Exception{
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        sqLiteDatabase.beginTransaction();  // Inicia a transação
+
+        String dataPesquisa = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
+        String horaPesquisa = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+        pesquisa.setDataPesquisa(dataPesquisa);
+        pesquisa.setHoraPesquisa(horaPesquisa);
+        // Salva a pesquisa
+        ContentValues values = new ContentValues();
+
+        if(pesquisa.getPesquisador()!=null){
+            values.put("nm_pesquisador", pesquisa.getPesquisador());
+        }else{
+            throw new Exception("Pesquisador Nulo!");
+        }
+
+        if (pesquisa.getTipoPesquisa() != null) {
+            values.put("ds_tipo_pesquisa", pesquisa.getTipoPesquisa());
+        }else{
+            throw new Exception("Tipo de Pesquisa Nulo!");
+        }
+        if(pesquisa.getDataPesquisa()!=null){
+            values.put("dt_pesquisa", pesquisa.getDataPesquisa());
+        }else{
+            throw new Exception("Data da Pesquisa Nula!");
+        }
+        if(pesquisa.getHoraPesquisa()!=null){
+            values.put("hr_pesquisa", pesquisa.getHoraPesquisa());
+        }else{
+            throw new Exception("Hora da Pesquisa Nula!");
+        }
+
+        if(pesquisa.getLinhaPesquisa()==null ||
+                pesquisa.getLinhaPesquisa().getNome().isEmpty()){
+            throw new Exception("Linha Nula");
+        }else{
+            values.put("id_linha_pesquisa", pesquisa.getLinhaPesquisa().getId());
+        }
+
+        if(pesquisa.getEstacaoPesquisa()==null ||
+                pesquisa.getEstacaoPesquisa().getNome().isEmpty()){
+            throw new Exception("Estação Nula");
+        }else{
+            values.put("id_estacao_pesquisa", pesquisa.getEstacaoPesquisa().getId());
+        }
+
+        if(pesquisa.getAreaPesquisa()==null ||
+                pesquisa.getAreaPesquisa().isEmpty()){
+            throw new Exception("Área da Pesquisa Nula");
+        }else{
+            values.put("nm_area_pesquisa", pesquisa.getAreaPesquisa());
+        }
+
+        if(pesquisa.getOrigem()==null &&
+                pesquisa.getDestino()==null){
+            throw new Exception("Pesquisa Inválida! Origem e Destino Nulos");
+        }
+
+        if(pesquisa.getOrigem()==null ||
+                pesquisa.getOrigem().isEmpty()){
+            values.put("nm_origem", "");
+        }else{
+            values.put("nm_origem", pesquisa.getOrigem());
+        }
+        if(pesquisa.getDestino()==null ||
+                pesquisa.getDestino().isEmpty()){
+            values.put("nm_destino", "");
+        }else{
+            values.put("nm_destino", pesquisa.getDestino());
+        }
+
+
+        long pesquisaId = sqLiteDatabase.insert("Pesquisas", null, values);  // Insere a pesquisa e pega o id gerado
+
+        // Verifica se a pesquisa foi inserida com sucesso
+        if (pesquisaId == -1) {
+            String erro = values.toString();
+            throw new Exception("DatabaseHelper - Erro ao inserir pesquisa");
+        }
+
+        sqLiteDatabase.setTransactionSuccessful();  // Marca a transação como bem-sucedida
+
+        if (sqLiteDatabase != null) {
+            sqLiteDatabase.endTransaction();  // Finaliza a transação
+            sqLiteDatabase.close();  // Fecha o banco de dados
+        }
+
     }
 
     public ArrayList<Pesquisa> getPesquisas() {
@@ -620,4 +713,3 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable {
     }
 
 }
-

@@ -17,7 +17,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.metro.pesquisacptm.R;
+import com.metro.pesquisacptm.controller.PesquisaController;
 import com.metro.pesquisacptm.model.Pesquisa;
+import com.metro.pesquisacptm.persistence.LogErros;
 import com.metro.pesquisacptm.persistence.Utilidades;
 
 public class PesquisaCompostaActivity extends AppCompatActivity {
@@ -29,7 +31,7 @@ public class PesquisaCompostaActivity extends AppCompatActivity {
     private Button btnSalvar, btnEncerrar;
     TextView lblQuantidadePesquisa;
     private Pesquisa pesquisa;
-    private Utilidades utilidades;
+    //private Utilidades utilidades;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,7 @@ public class PesquisaCompostaActivity extends AppCompatActivity {
             return insets;
         });
 
-        utilidades = Utilidades.getInstance(this);
+        //utilidades = Utilidades.getInstance(this);
         pesquisa = (Pesquisa) getIntent().getSerializableExtra("pesquisa", Pesquisa.class);
         quantidadePesquisa = getIntent().getIntExtra("quantidadePesquisa",0);
         lblQuantidadePesquisa = findViewById(R.id.lblQuantidadePesquisaComposta);
@@ -215,19 +217,40 @@ public class PesquisaCompostaActivity extends AppCompatActivity {
     }
 
     private void salvar(){
-        utilidades.salvarPesquisa(pesquisa);
-        quantidadePesquisa++;
-        checkboxCPTMOrigem.setChecked(false);
-        checkboxMetroOrigem.setChecked(false);
-        checkboxViaQuatroOrigem.setChecked(false);
-        checkboxViaMobilidadeOrigem.setChecked(false);
-        checkboxRuaOrigem.setChecked(false);
-        checkboxCPTMDestino.setChecked(false);
-        checkboxMetroDestino.setChecked(false);
-        checkboxViaQuatroDestino.setChecked(false);
-        checkboxViaMobilidadeDestino.setChecked(false);
-        checkboxRuaDestino.setChecked(false);
-        lblQuantidadePesquisa.setText("Quantidade de Pesquisas Realizadas: "+quantidadePesquisa);
+        PesquisaController controller = new PesquisaController(this);
+
+        try {
+            controller.salvarPesquisa(pesquisa);
+            //utilidades.salvarPesquisa(pesquisa);
+            quantidadePesquisa++;
+            checkboxCPTMOrigem.setChecked(false);
+            checkboxMetroOrigem.setChecked(false);
+            checkboxViaQuatroOrigem.setChecked(false);
+            checkboxViaMobilidadeOrigem.setChecked(false);
+            checkboxRuaOrigem.setChecked(false);
+            checkboxCPTMDestino.setChecked(false);
+            checkboxMetroDestino.setChecked(false);
+            checkboxViaQuatroDestino.setChecked(false);
+            checkboxViaMobilidadeDestino.setChecked(false);
+            checkboxRuaDestino.setChecked(false);
+            lblQuantidadePesquisa.setText("Quantidade de Pesquisas Realizadas: "+quantidadePesquisa);
+        } catch (Exception e) {
+            caixaDeDialogo(e.getMessage());
+        }
+    }
+
+    private void caixaDeDialogo(String mensagem){
+        new AlertDialog.Builder(this)
+                .setTitle("Erro")
+                .setMessage(mensagem)
+                .setPositiveButton("Sim", (dialog, which) -> {
+                    try {
+                        new LogErros(mensagem);
+                    } catch (Exception e) {
+                        caixaDeDialogo(e.getMessage());
+                    }
+                })
+                .show();
     }
 
 }

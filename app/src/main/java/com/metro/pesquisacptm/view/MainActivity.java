@@ -20,10 +20,12 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.metro.pesquisacptm.R;
+import com.metro.pesquisacptm.controller.LinhaController;
 import com.metro.pesquisacptm.model.Estacao;
 import com.metro.pesquisacptm.model.Linha;
 import com.metro.pesquisacptm.model.Pesquisa;
 import com.metro.pesquisacptm.persistence.ExportaCSV;
+import com.metro.pesquisacptm.persistence.LogErros;
 import com.metro.pesquisacptm.persistence.Utilidades;
 
 import java.io.IOException;
@@ -31,7 +33,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    Utilidades utilidades;
+    //Utilidades utilidades;
     private EditText txtNomePesquisador;
     private Spinner spinnerTipoPesquisa,spinnerLinha, spinnerEstacao, spinnerLocal;
     private Button btnEntrar, btnExportar, btnSair;
@@ -52,30 +54,29 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        utilidades = Utilidades.getInstance(this);
+        //utilidades = Utilidades.getInstance(this);
+        try {
+            LinhaController controller = new LinhaController(this);
+            linhas = controller.getLinhas();
+            txtNomePesquisador = findViewById(R.id.nomePesquisador);
+            spinnerTipoPesquisa = findViewById(R.id.spinnerTipoPesquisa);
+            spinnerLinha = findViewById(R.id.spinnerLinha);
+            spinnerEstacao = findViewById(R.id.spinnerEstacao);
+            spinnerLocal = findViewById(R.id.spinnerLocal);
+            btnEntrar = findViewById(R.id.btnEntrar);
+            btnExportar = findViewById(R.id.btnExportar);
+            btnSair = findViewById(R.id.btnSair);
 
-        txtNomePesquisador = findViewById(R.id.nomePesquisador);
-        spinnerTipoPesquisa = findViewById(R.id.spinnerTipoPesquisa);
-        spinnerLinha = findViewById(R.id.spinnerLinha);
-        spinnerEstacao = findViewById(R.id.spinnerEstacao);
-        spinnerLocal = findViewById(R.id.spinnerLocal);
-        btnEntrar = findViewById(R.id.btnEntrar);
-        btnExportar = findViewById(R.id.btnExportar);
-        btnSair = findViewById(R.id.btnSair);
+            configurarSpinners();
 
-        carregarLinhas();
-        configurarSpinners();
-
-        btnEntrar.setOnClickListener(v -> iniciarPesquisa());
-        btnExportar.setOnClickListener(v -> exportarPesquisa());
-        btnSair.setOnClickListener(v -> sairApp());
+            btnEntrar.setOnClickListener(v -> iniciarPesquisa());
+            btnExportar.setOnClickListener(v -> exportarPesquisa());
+            btnSair.setOnClickListener(v -> sairApp());
+        } catch (Exception e) {
+            caixaDeDialogo(e.getMessage());
+        }
     }
 
-    private void carregarLinhas() {
-        //comentado para teste utilizar linhas
-        //linhas = databaseHelper.getLinhas();
-        linhas = utilidades.getLinhas();
-    }
 
     private void configurarSpinners() {
 
@@ -193,23 +194,32 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void exportarPesquisa() {
-        ExportaCSV exportadorCSV = new ExportaCSV(this);
-        new AlertDialog.Builder(this)
-                .setTitle("Sucesso")
-                .setMessage("Sucesso ao Exportar o Arquivo: ")
-                .setPositiveButton("Ok", null)
-                .show();
+        Intent intent = new Intent(this, ExportarActivity.class);
+        startActivity(intent);
+        //ExportaCSV exportadorCSV = new ExportaCSV(this);
+/*
         try {
             exportadorCSV.exportarCSV();
+            new AlertDialog.Builder(this)
+                    .setTitle("Sucesso")
+                    .setMessage("Sucesso ao Exportar o Arquivo: ")
+                    .setPositiveButton("Ok", null)
+                    .show();
         } catch (IOException e) {
-            Log.e("MainActivity", "exportarPesquisa: "+e.getMessage());
+
+ */
+            //Log.e("MainActivity", "exportarPesquisa: "+e.getMessage());
+            //caixaDeDialogo(e.getMessage());
+            /*
             new AlertDialog.Builder(this)
                     .setTitle("Erro")
                     .setMessage("Erro ao Exportar o Arquivo: "+e.getMessage())
                     .setPositiveButton("Ok", null)
                     .show();
 
-        }
+             */
+
+        //}
     }
 
     private void sairApp() {
@@ -219,6 +229,21 @@ public class MainActivity extends AppCompatActivity {
                 //.setPositiveButton("Sim", (dialog, which) -> finish())
                 .setPositiveButton("Sim", (dialog, which) -> finishAffinity())
                 .setNegativeButton("Não", null)
+                .show();
+    }
+
+
+    private void caixaDeDialogo(String mensagem){
+        new AlertDialog.Builder(this)
+                .setTitle("Erro")
+                .setMessage(mensagem)
+                .setPositiveButton("Sim", (dialog, which) -> {
+                    try {
+                        new LogErros(mensagem);
+                    } catch (Exception e) {
+                        caixaDeDialogo(e.getMessage());
+                    }
+                })
                 .show();
     }
 }

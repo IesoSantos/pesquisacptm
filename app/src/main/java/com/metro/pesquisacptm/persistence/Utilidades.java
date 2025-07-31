@@ -116,7 +116,7 @@ comentado para usar context
     }
 
 
-    public void salvarPesquisa(Pesquisa pesquisa){
+    public void salvarPesquisa(Pesquisa pesquisa) throws Exception{
         databaseHelper.salvarPesquisa(pesquisa);
     }
 

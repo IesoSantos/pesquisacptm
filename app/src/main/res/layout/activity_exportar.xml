@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.ExportarActivity"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <include
+        layout="@layout/action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        android:id="@+id/tvCabecalhoExportaArquivo"
+        android:layout_width="wrap_content"
+        android:layout_height="30sp"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:layout_gravity="center"
+        android:layout_margin="0px"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp">
+
+        <EditText
+            android:id="@+id/dt_inicio_pesquisa"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="Selecione a Data Inicial"
+            android:drawableEnd ="@drawable/ic_calendar"
+            android:clickable="false"
+            android:focusable="false"
+            android:cursorVisible="false"
+            android:textSize="15dp"
+            />
+
+        <EditText
+            android:id="@+id/dt_fim_pesquisa"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:drawableEnd="@drawable/ic_calendar"
+            android:hint="Selecione a Data Final"
+            android:clickable="false"
+            android:focusable="false"
+            android:cursorVisible="false"
+            android:textSize="15dp"
+            />
+
+        <Button
+            android:id="@+id/btnFiltarPesquisa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Filtrar"
+            android:textSize="15dp"
+            android:layout_marginStart="10dp"/>
+
+        <Button
+            android:id="@+id/btnExportarPesquisa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Exportar"
+            android:textSize="15dp"
+            android:layout_marginStart="10dp"/>
+
+        <Button
+            android:id="@+id/btnVoltarExportar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Voltar"
+            android:textSize="15dp"
+            android:layout_marginStart="10dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="0px"
+        android:layout_marginStart="10dp">
+
+        <TextView
+            android:text="Pesquisador"
+            android:textStyle="bold"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:padding="1dp"
+            android:gravity="center"
+            android:background="@drawable/grid_border"
+            android:textSize="12dp"
+            />
+
+        <TextView
+            android:text="Tipo de Pesquisa"
+            android:textStyle="bold"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:padding="1dp"
+            android:gravity="center"
+            android:background="@drawable/grid_border"
+            android:textSize="12dp"
+            />
+
+        <TextView
+            android:text="Data"
+            android:textStyle="bold"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:padding="1dp"
+            android:gravity="center"
+            android:background="@drawable/grid_border"
+            android:textSize="12dp"
+            />
+
+        <TextView
+            android:text="Hora"
+            android:textStyle="bold"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:padding="1dp"
+            android:gravity="center"
+            android:background="@drawable/grid_border"
+            android:textSize="12dp"/>
+
+        <TextView
+            android:text="Linha Pesquisa"
+            android:textStyle="bold"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:padding="1dp"
+            android:gravity="center"
+            android:background="@drawable/grid_border"
+            android:textSize="12dp"
+            />
+
+        <TextView
+            android:text="Estação Pesquisada"
+            android:textStyle="bold"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:padding="1dp"
+            android:gravity="center"
+            android:background="@drawable/grid_border"
+            android:textSize="12dp"/>
+
+        <TextView
+            android:text="Área da Pesquisa"
+            android:textStyle="bold"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:padding="1dp"
+            android:gravity="center"
+            android:background="@drawable/grid_border"
+            android:textSize="12dp"/>
+
+
+        <TextView
+            android:text="Origem"
+            android:textStyle="bold"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:padding="1dp"
+            android:gravity="center"
+            android:background="@drawable/grid_border"
+            android:textSize="12dp"/>
+        <TextView
+            android:text="Destino"
+            android:textStyle="bold"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:padding="1dp"
+            android:gravity="center"
+            android:background="@drawable/grid_border"
+            android:textSize="12dp"/>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/lstPesquisas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        >
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+</LinearLayout>
