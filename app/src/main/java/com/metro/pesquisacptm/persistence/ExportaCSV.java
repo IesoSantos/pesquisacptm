@@ -4,17 +4,13 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
-
-import androidx.annotation.RequiresApi;
 
 import com.metro.pesquisacptm.controller.PesquisaController;
 import com.metro.pesquisacptm.model.Pesquisa;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -22,12 +18,12 @@ import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 public class ExportaCSV {
 
-    private File diretorio;
+    private final File diretorio = Environment.getExternalStoragePublicDirectory(
+            Environment.DIRECTORY_DOCUMENTS);
     private File arquivoCSV;
     //private Utilidades utilidades;
     private final ArrayList<Pesquisa> pesquisas;
@@ -38,8 +34,8 @@ public class ExportaCSV {
         //pesquisas = utilidades.getPesquisas();
         PesquisaController controller = new PesquisaController(context);
         pesquisas = controller.getPesquisas();
-        diretorio = Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_DOCUMENTS);
+        //diretorio = Environment.getExternalStoragePublicDirectory(
+          //      Environment.DIRECTORY_DOCUMENTS);
         this.context = context;
     }
 
@@ -48,8 +44,8 @@ public class ExportaCSV {
         //pesquisas = utilidades.getPesquisas();
         PesquisaController controller = new PesquisaController(context);
         this.pesquisas = pesquisas;
-        diretorio = Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_DOCUMENTS);
+        //diretorio = Environment.getExternalStoragePublicDirectory(
+          //      Environment.DIRECTORY_DOCUMENTS);
         this.context = context;
     }
 /*
@@ -138,7 +134,9 @@ public void exportarCSV() throws IOException {
     values.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOCUMENTS);
 
     ContentResolver resolver = context.getContentResolver();
-    Uri uri = resolver.insert(MediaStore.Files.getContentUri("external"), values);
+    Uri uri = resolver.insert(
+            MediaStore.Files.getContentUri("external"),
+            values);
 
     if (uri == null) {
         throw new IOException("Erro ao criar URI do arquivo");
@@ -154,9 +152,10 @@ public void exportarCSV() throws IOException {
     outputStream.write(0xBB);
     outputStream.write(0xBF);
 
-    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
+    BufferedWriter writer = new BufferedWriter(
+            new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
 
-    writer.append("Id;Pesquisador;Tipo de Pesquisa;Data da Pesquisa;" +
+    writer.append("Identificador;Pesquisador;Tipo de Pesquisa;Data da Pesquisa;" +
             "Hora da Pesquisa;" +
             "Linha da Pesquisa;Estação da Pesquisa;" +
             "Área de Pesquisa;" +
