@@ -31,43 +31,48 @@
         android:text="Selecione a Origem:"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:padding="10dp"
+        android:padding="5dp"
         android:layout_gravity="center_horizontal"/>
 
-    <CheckBox
-        android:id="@+id/checkboxCPTM"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CPTM"
-        android:layout_gravity="center_horizontal"/>
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal">
 
-    <CheckBox
-        android:id="@+id/checkboxViaMobilidade"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ViaMobilidade"
-        android:layout_gravity="center_horizontal"/>
+        <CheckBox
+            android:id="@+id/checkboxCPTM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CPTM"/>
 
-    <CheckBox
-        android:id="@+id/checkboxViaQuatro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ViaQuatro"
-        android:layout_gravity="center_horizontal"/>
+        <CheckBox
+            android:id="@+id/checkboxViaMobilidade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ViaMobilidade"/>
 
-    <CheckBox
-        android:id="@+id/checkboxMetro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Metrô SP"
-        android:layout_gravity="center_horizontal"/>
+        <CheckBox
+            android:id="@+id/checkboxViaQuatro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ViaQuatro"/>
 
-    <CheckBox
-        android:id="@+id/checkboxRua"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Rua"
-        android:layout_gravity="center_horizontal"/>
+        <CheckBox
+            android:id="@+id/checkboxMetro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Metrô SP"/>
+
+        <CheckBox
+            android:id="@+id/checkboxRua"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rua"/>
+
+
+    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="wrap_content"
