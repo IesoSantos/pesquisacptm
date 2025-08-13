@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PesquisaCPTM"
-        tools:targetApi="34">
+        >
+        <!-- tools:targetApi="34" apagado da linha acima-->
         <activity
             android:name=".view.ExportarActivity"
             android:exported="false" />

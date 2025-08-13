@@ -84,8 +84,12 @@ public class MainActivity extends AppCompatActivity {
         String[] options = {"Destino", "Estimativa"};
 
         // Criando o ArrayAdapter para popular o Spinner
-        ArrayAdapter<String> adapterTipoPesquisa = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, options);
-        adapterTipoPesquisa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> adapterTipoPesquisa = new ArrayAdapter<>(
+                //this, android.R.layout.simple_spinner_item, options);
+                this,R.layout.main_spinner_item, options);
+        adapterTipoPesquisa.setDropDownViewResource(
+                //android.R.layout.simple_spinner_dropdown_item);
+                R.layout.main_spinner_item);
         spinnerTipoPesquisa.setAdapter(adapterTipoPesquisa);
 
         // Adicionando um listener para capturar a seleção
@@ -102,12 +106,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        arrayAdapterLinha = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, linhas);
-        arrayAdapterLinha.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        arrayAdapterLinha = new ArrayAdapter<>(this,
+                //android.R.layout.simple_spinner_item, linhas);
+                R.layout.main_spinner_item, linhas);
+        arrayAdapterLinha.setDropDownViewResource(
+                //android.R.layout.simple_spinner_dropdown_item);
+                R.layout.main_spinner_item);
         spinnerLinha.setAdapter(arrayAdapterLinha);
 
         // Configurar evento de seleção do Spinner Linha
-        spinnerLinha.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerLinha.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 // Obter a Linha selecionada
@@ -140,8 +149,12 @@ public class MainActivity extends AppCompatActivity {
     private void atualizarEstacoesSpinner(Linha linha) {
         // Atualiza as estações baseadas na linha selecionada
         estacoes = linha.getEstacoes();
-        ArrayAdapter<Estacao> estacaoAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, estacoes);
-        estacaoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<Estacao> estacaoAdapter = new ArrayAdapter<>(
+                //this, android.R.layout.simple_spinner_item, estacoes);
+                this,R.layout.main_spinner_item, estacoes);
+        estacaoAdapter.setDropDownViewResource(
+                //android.R.layout.simple_spinner_dropdown_item);
+                R.layout.main_spinner_item);
         spinnerEstacao.setAdapter(estacaoAdapter);
     }
 
@@ -149,8 +162,11 @@ public class MainActivity extends AppCompatActivity {
 
         // Configura o adapter para o Spinner de Local
         ArrayAdapter<String> localAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, estacao.getAreas());
-        localAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                //android.R.layout.simple_spinner_item, estacao.getAreas());
+                R.layout.main_spinner_item, estacao.getAreas());
+        localAdapter.setDropDownViewResource(
+                //android.R.layout.simple_spinner_dropdown_item);
+                R.layout.main_spinner_item);
         spinnerLocal.setAdapter(localAdapter);
     }
 

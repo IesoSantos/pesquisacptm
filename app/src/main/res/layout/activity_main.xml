@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:hint="Nome do Pesquisador"
         android:inputType="textPersonName"
-        android:textSize="18sp"
+        android:textSize="13sp"
         android:padding="12dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,20 +25,21 @@
         android:id="@+id/lblTipoPesquisa"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/nomePesquisador"
         app:layout_constraintHorizontal_bias="0.5"
         android:text="Tipo de Pesquisa"
-        android:textSize="18sp"/>
+        android:textSize="12sp"
+        android:textStyle="bold"/>
 
     <!-- Spinner para selecionar a linha -->
     <Spinner
         android:id="@+id/spinnerTipoPesquisa"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,20 +51,21 @@
         android:id="@+id/lblLinha"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/spinnerTipoPesquisa"
         app:layout_constraintHorizontal_bias="0.5"
         android:text="Linha"
-        android:textSize="18sp"/>
+        android:textSize="12sp"
+        android:textStyle="bold"/>
 
     <!-- Spinner para selecionar a linha -->
     <Spinner
         android:id="@+id/spinnerLinha"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,20 +77,21 @@
         android:id="@+id/lblEstacao"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/spinnerLinha"
         app:layout_constraintHorizontal_bias="0.5"
         android:text="Estação"
-        android:textSize="18sp"/>
+        android:textSize="12sp"
+        android:textStyle="bold"/>
 
     <!-- Spinner para selecionar a estação -->
     <Spinner
         android:id="@+id/spinnerEstacao"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -99,20 +102,21 @@
         android:id="@+id/lblLocal"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/spinnerEstacao"
         app:layout_constraintHorizontal_bias="0.5"
         android:text="Local"
-        android:textSize="18sp"/>
+        android:textSize="12sp"
+        android:textStyle="bold"/>
 
     <!-- Spinner para selecionar o local -->
     <Spinner
         android:id="@+id/spinnerLocal"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -139,7 +143,7 @@
             android:layout_width="150sp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5sp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="10sp"
             android:paddingTop="0dp"
             android:paddingBottom="0dp"
@@ -152,7 +156,7 @@
             android:layout_width="150sp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5sp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="10sp"
             android:paddingTop="0dp"
             android:paddingBottom="0dp"
@@ -165,7 +169,7 @@
             android:layout_width="150sp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5sp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="10sp"
             android:paddingTop="0dp"
             android:paddingBottom="0dp"
